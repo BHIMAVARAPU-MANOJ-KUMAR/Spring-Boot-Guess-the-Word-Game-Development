@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GuessTheWord</title>
+<!-- First the page is Loading, then the script is running -->
+    <script th:inline="javascript">
+
+        window.onload = function checkIfGameOver(){
+        var numberOfTriesRemaining = [[${triesLeft}]];
+        if(numberOfTriesRemaining === 0){
+        alert("Game Over");
+        document.getElementById('guessedCharacter').disabled=true;
+        document.getElementById('try').disabled=true;
+        }
+        }
+
+        function reloadGame(){
+        window.location.href="http://localhost:8080/reload";
+        }
+
+    </script>
+
+</head>
+<body>
+<h1 align="center">Guess the Word</h1>
+<h2 align="center" th:text="${wordToDisplay}">Show a random word here</h2>
+<h2 align="right" th:text="'Tries Remaining : ' + ${triesLeft}"></h2>
+<hr>
+
+<input type="button" value="Reload" id="reload" style="float:right; background-color: #C3888A; border-radius:20px;
+height: 30px; width: 60px; color: blanchedalmond; font-style: normal; font-size: 15px; font-family: cursive;" onclick="reloadGame();">
+
+<div align="center">
+    <form action="game-home" method="GET">
+<label style="height: 30px; width: 60px; font-style: normal; font-size: 15px; font-family: cursive;">Guess a Character : </label>
+<input type="text" style="border-radius: 20px; font-family: cursive;
+    font-style: normal;
+    font-size: large;
+    font-weight: 500;
+    height: 30px;
+    width: 200px;" name="guessedCharacter" id="guessedCharacter"/>
+<input style="background-color: #C3888A; border-radius:20px;
+height: 30px; width: 60px; color: blanchedalmond; font-style: normal; font-size: 15px; font-family: cursive;" type="submit" value="try" id="try"/>
+    </form>
+</div>
+
+</body>
+</html>
